@@ -1,6 +1,6 @@
 {
   "name": "bit-bundler-builtins",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Bit bundler plugin for processing builtins modules such as process, __dirname, __path",
   "main": "index.js",
   "scripts": {
@@ -14,12 +14,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MiguelCastillo/bit-bundler.git"
+    "url": "https://github.com/MiguelCastillo/bit-bundler-builtins.git"
   },
   "bugs": {
-    "url": "https://github.com/MiguelCastillo/bit-bundler/issues"
+    "url": "https://github.com/MiguelCastillo/bit-bundler-builtins/issues"
   },
-  "homepage": "https://github.com/MiguelCastillo/bit-bundler",
+  "homepage": "https://github.com/MiguelCastillo/bit-bundler-builtins",
   "dependencies": {
     "bit-bundler-utils": "^1.0.1"
   }
