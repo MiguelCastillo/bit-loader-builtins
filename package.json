@@ -1,6 +1,6 @@
 {
   "name": "bit-bundler-builtins",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Bit bundler plugin for processing builtins modules such as process, __dirname, __path",
   "main": "index.js",
   "scripts": {
