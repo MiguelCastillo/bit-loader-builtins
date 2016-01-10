@@ -1,6 +1,6 @@
 {
   "name": "bit-bundler-builtins",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "bit-bundler loader plugin for handling nodejs builtin modules, __dirname, and __filename",
   "main": "index.js",
   "scripts": {
