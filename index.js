@@ -23,6 +23,16 @@ var builtInMap = {
       return "";
     }
   },
+  buffer: {
+    name: "buffer",
+    target: "buffer",
+    test: function(meta) {
+      return meta.deps.indexOf("buffer") !== -1;
+    },
+    value: function() {
+      return "";
+    }
+  },
   __dirname: {
     name: "__dirname",
     test: function(moduleMeta) {
