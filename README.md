@@ -3,9 +3,10 @@
 
 ### Supported modules:
 
-- [process](https://github.com/defunctzombie/node-process)
-- [path](https://github.com/jinder/path)
 - [buffer](https://github.com/feross/buffer)
+- [events](https://github.com/Gozala/events)
+- [path](https://github.com/jinder/path)
+- [process](https://github.com/defunctzombie/node-process)
 
 
 ### Node variables
