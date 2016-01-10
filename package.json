@@ -1,7 +1,7 @@
 {
   "name": "bit-bundler-builtins",
   "version": "1.0.0",
-  "description": "Bit bundler plugin for processing builtins modules such as process, __dirname, __path",
+  "description": "bit-bundler loader plugin for handling nodejs builtin modules, __dirname, and __filename",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/MiguelCastillo/bit-bundler-builtins",
   "dependencies": {
-    "bit-bundler-utils": "^1.0.1"
+    "bit-bundler-utils": "^1.0.1",
+    "process": "^0.11.2"
   }
 }
