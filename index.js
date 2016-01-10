@@ -64,7 +64,7 @@ function resolveBuiltin(meta) {
 }
 
 
-function dependencyBuiltin(meta) {
+function transformBuiltin(meta) {
   var wrapped;
 
   var builtInResult = Object.keys(builtInMap).reduce(function(container, builtIn) {
@@ -91,6 +91,6 @@ function dependencyBuiltin(meta) {
 module.exports = function() {
   return {
     resolve: resolveBuiltin,
-    dependency: dependencyBuiltin
+    transform: transformBuiltin
   };
 };
