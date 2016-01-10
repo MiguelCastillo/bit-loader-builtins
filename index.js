@@ -6,38 +6,29 @@ var builtInMap = {
   buffer: {
     name: "buffer",
     target: "buffer",
-    test: function(meta) {
-      return false;
-    },
-    value: function() {
+    test: function() {
       return false;
     }
   },
   events: {
     name: "events",
     target: "events",
-    test: function(meta) {
-      return false;
-    },
-    value: function() {
+    test: function() {
       return false;
     }
   },
   path: {
     name: "path",
     target: "path",
-    test: function(meta) {
-      return false;
-    },
-    value: function() {
+    test: function() {
       return false;
     }
   },
   process: {
     name: "process",
     target: "process/browser",
-    test: function(moduleMeta) {
-      return /process.(cwd|nextTick|platform)/.test(moduleMeta.source) && moduleMeta.name !== builtInMap.process.name;
+    test: function(meta) {
+      return /process.(cwd|nextTick|platform)/.test(meta.source) && meta.name !== builtInMap.process.name;
     },
     value: function() {
       return "require('process')";
@@ -45,41 +36,41 @@ var builtInMap = {
   },
   __dirname: {
     name: "__dirname",
-    test: function(moduleMeta) {
-      return /\b__dirname\b/.test(moduleMeta.source);
+    test: function(meta) {
+      return /\b__dirname\b/.test(meta.source);
     },
-    value: function(moduleMeta) {
-      return "'/" + path.relative(".", moduleMeta.directory) + "'";
+    value: function(meta) {
+      return "'/" + path.relative(".", meta.directory) + "'";
     }
   },
   __filename: {
     name: "__filename",
-    test: function(moduleMeta) {
-      return /\b__filename\b/.test(moduleMeta.source);
+    test: function(meta) {
+      return /\b__filename\b/.test(meta.source);
     },
-    value: function(moduleMeta) {
-      return "'/" + path.relative(".", moduleMeta.path) + "'";
+    value: function(meta) {
+      return "'/" + path.relative(".", meta.path) + "'";
     }
   }
 };
 
 
-function resolveBuiltin(moduleMeta) {
-  if (builtInMap.hasOwnProperty(moduleMeta.name)) {
+function resolveBuiltin(meta) {
+  if (builtInMap.hasOwnProperty(meta.name)) {
     return resolver({
-      name: builtInMap[moduleMeta.name].target
+      name: builtInMap[meta.name].target
     });
   }
 }
 
 
-function dependencyBuiltin(moduleMeta) {
+function dependencyBuiltin(meta) {
   var wrapped;
 
   var builtInResult = Object.keys(builtInMap).reduce(function(container, builtIn) {
-    if (builtInMap[builtIn].test(moduleMeta)) {
+    if (builtInMap[builtIn].test(meta)) {
       container.params.push(builtIn);
-      container.deps.push(builtInMap[builtIn].value(moduleMeta));
+      container.deps.push(builtInMap[builtIn].value(meta));
     }
 
     return container;
@@ -87,12 +78,12 @@ function dependencyBuiltin(moduleMeta) {
 
   if (builtInResult.params.length) {
     wrapped = "(function(" + builtInResult.params.join(",") + ") {\n";
-    wrapped += moduleMeta.source;
+    wrapped += meta.source;
     wrapped += "\n})(" + builtInResult.deps.join(",") + ")";
   }
 
   return {
-    source: wrapped || moduleMeta.source
+    source: wrapped || meta.source
   };
 }
 
