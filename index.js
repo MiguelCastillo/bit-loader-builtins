@@ -6,28 +6,28 @@ var builtInMap = {
   buffer: {
     name: "buffer",
     target: "buffer",
-    test: function() {
+    injectDependency: function() {
       return false;
     }
   },
   events: {
     name: "events",
     target: "events",
-    test: function() {
+    injectDependency: function() {
       return false;
     }
   },
   path: {
     name: "path",
     target: "path",
-    test: function() {
+    injectDependency: function() {
       return false;
     }
   },
   process: {
     name: "process",
     target: "process/browser",
-    test: function(meta) {
+    injectDependency: function(meta) {
       return /process.(cwd|nextTick|platform)/.test(meta.source) && meta.name !== builtInMap.process.name;
     },
     value: function() {
@@ -36,7 +36,7 @@ var builtInMap = {
   },
   __dirname: {
     name: "__dirname",
-    test: function(meta) {
+    injectDependency: function(meta) {
       return /\b__dirname\b/.test(meta.source);
     },
     value: function(meta) {
@@ -45,7 +45,7 @@ var builtInMap = {
   },
   __filename: {
     name: "__filename",
-    test: function(meta) {
+    injectDependency: function(meta) {
       return /\b__filename\b/.test(meta.source);
     },
     value: function(meta) {
@@ -68,7 +68,7 @@ function dependencyBuiltin(meta) {
   var wrapped;
 
   var builtInResult = Object.keys(builtInMap).reduce(function(container, builtIn) {
-    if (builtInMap[builtIn].test(meta)) {
+    if (builtInMap[builtIn].injectDependency(meta)) {
       container.params.push(builtIn);
       container.deps.push(builtInMap[builtIn].value(meta));
     }
