@@ -9,6 +9,6 @@
 - [process](https://github.com/defunctzombie/node-process)
 
 
-### Node variables
+### Variables
 
  `__dirname` and `__filename`.
