@@ -3,6 +3,36 @@ var path = require("path");
 
 
 var builtInMap = {
+  buffer: {
+    name: "buffer",
+    target: "buffer",
+    test: function(meta) {
+      return false;
+    },
+    value: function() {
+      return false;
+    }
+  },
+  events: {
+    name: "events",
+    target: "events",
+    test: function(meta) {
+      return false;
+    },
+    value: function() {
+      return false;
+    }
+  },
+  path: {
+    name: "path",
+    target: "path",
+    test: function(meta) {
+      return false;
+    },
+    value: function() {
+      return false;
+    }
+  },
   process: {
     name: "process",
     target: "process/browser",
@@ -11,26 +41,6 @@ var builtInMap = {
     },
     value: function() {
       return "require('process')";
-    }
-  },
-  path: {
-    name: "path",
-    target: "path",
-    test: function(meta) {
-      return meta.deps.indexOf("path") !== -1;
-    },
-    value: function() {
-      return "";
-    }
-  },
-  buffer: {
-    name: "buffer",
-    target: "buffer",
-    test: function(meta) {
-      return meta.deps.indexOf("buffer") !== -1;
-    },
-    value: function() {
-      return "";
     }
   },
   __dirname: {
@@ -67,7 +77,7 @@ function dependencyBuiltin(moduleMeta) {
   var wrapped;
 
   var builtInResult = Object.keys(builtInMap).reduce(function(container, builtIn) {
-    if (builtInMap[builtIn].test(moduleMeta) && builtInMap[builtIn].value(moduleMeta)) {
+    if (builtInMap[builtIn].test(moduleMeta)) {
       container.params.push(builtIn);
       container.deps.push(builtInMap[builtIn].value(moduleMeta));
     }
