@@ -23,6 +23,7 @@
   "dependencies": {
     "bit-bundler-utils": "^1.0.1",
     "buffer": "^4.1.0",
+    "path": "^0.12.7",
     "process": "^0.11.2"
   }
 }
