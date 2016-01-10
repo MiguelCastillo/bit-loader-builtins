@@ -5,6 +5,7 @@
 
 - [process](https://github.com/defunctzombie/node-process)
 - [path](https://github.com/jinder/path)
+- [buffer](https://github.com/feross/buffer)
 
 
 ### Node variables
