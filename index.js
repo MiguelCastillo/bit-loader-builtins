@@ -13,6 +13,26 @@ var builtInMap = {
       return "require('process')";
     }
   },
+  path: {
+    name: "path",
+    target: "path",
+    test: function(meta) {
+      return meta.deps.indexOf("path") !== -1;
+    },
+    value: function() {
+      return "";
+    }
+  },
+  buffer: {
+    name: "buffer",
+    target: "buffer",
+    test: function(meta) {
+      return meta.deps.indexOf("buffer") !== -1;
+    },
+    value: function() {
+      return "";
+    }
+  },
   __dirname: {
     name: "__dirname",
     test: function(moduleMeta) {
@@ -43,11 +63,11 @@ function resolveBuiltin(moduleMeta) {
 }
 
 
-function transformBuiltin(moduleMeta) {
+function dependencyBuiltin(moduleMeta) {
   var wrapped;
 
   var builtInResult = Object.keys(builtInMap).reduce(function(container, builtIn) {
-    if (builtInMap[builtIn].test(moduleMeta)) {
+    if (builtInMap[builtIn].test(moduleMeta) && builtInMap[builtIn].value(moduleMeta)) {
       container.params.push(builtIn);
       container.deps.push(builtInMap[builtIn].value(moduleMeta));
     }
@@ -70,6 +90,6 @@ function transformBuiltin(moduleMeta) {
 module.exports = function() {
   return {
     resolve: resolveBuiltin,
-    transform: transformBuiltin
+    dependency: dependencyBuiltin
   };
 };
