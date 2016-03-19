@@ -1,5 +1,5 @@
 {
-  "name": "bit-bundler-builtins",
+  "name": "bit-loader-builtins",
   "version": "1.1.0",
   "description": "bit-bundler loader plugin for handling nodejs builtin modules, __dirname, and __filename",
   "main": "index.js",
@@ -8,18 +8,18 @@
   },
   "keywords": [
     "bit-bundler",
-    "bit-bundler-loader-plugin"
+    "bit-loader-plugin"
   ],
   "author": "Miguel Castillo <manchagnu@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MiguelCastillo/bit-bundler-builtins.git"
+    "url": "https://github.com/MiguelCastillo/bit-loader-builtins.git"
   },
   "bugs": {
-    "url": "https://github.com/MiguelCastillo/bit-bundler-builtins/issues"
+    "url": "https://github.com/MiguelCastillo/bit-loader-builtins/issues"
   },
-  "homepage": "https://github.com/MiguelCastillo/bit-bundler-builtins",
+  "homepage": "https://github.com/MiguelCastillo/bit-loader-builtins",
   "dependencies": {
     "bit-bundler-utils": "^1.0.1",
     "buffer": "^4.1.0",
