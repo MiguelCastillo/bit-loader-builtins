@@ -1,5 +1,5 @@
-# bit-bundler-builtins
-> bit-bundler loader plugin for handling nodejs builtin modules, __dirname, and __filename
+# bit-loader-builtins
+> bit-loader loader plugin for handling nodejs builtin modules, __dirname, and __filename
 
 ### Supported modules:
 
