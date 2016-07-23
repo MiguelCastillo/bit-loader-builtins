@@ -4,34 +4,34 @@ var path = require("path");
 
 var dependencyInjectionMap = {
   process: {
-    injectDependency: function(meta) {
+    canInject: function(meta) {
       return /process.(cwd|chdir|nextTick|platform|env|title|browser|argv|binding)/.test(meta.source) && meta.name !== "process";
     },
-    depedencyValue: function() {
+    injectDependency: function() {
       return "require('process')";
     }
   },
   __dirname: {
-    injectDependency: function(meta) {
+    canInject: function(meta) {
       return /\b__dirname\b/.test(meta.source);
     },
-    depedencyValue: function(meta) {
+    injectDependency: function(meta) {
       return "'/" + path.relative(".", meta.directory) + "'";
     }
   },
   __filename: {
-    injectDependency: function(meta) {
+    canInject: function(meta) {
       return /\b__filename\b/.test(meta.source);
     },
-    depedencyValue: function(meta) {
+    injectDependency: function(meta) {
       return "'/" + path.relative(".", meta.path) + "'";
     }
   },
   global: {
-    injectDependency: function(meta) {
+    canInject: function(meta) {
       return /\bglobal\b/.test(meta.source);
     },
-    depedencyValue: function() {
+    injectDependency: function() {
       return "typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : typeof window !== 'undefined' ? window : {}";
     }
   }
@@ -53,11 +53,11 @@ function injectBuiltinDependency(meta) {
   var builtInResult = Object
     .keys(dependencyInjectionMap)
     .filter(function(builtIn) {
-      return dependencyInjectionMap[builtIn].injectDependency(meta);
+      return dependencyInjectionMap[builtIn].canInject(meta);
     })
     .reduce(function(container, builtIn) {
       container.params.push(builtIn);
-      container.deps.push(dependencyInjectionMap[builtIn].depedencyValue(meta));
+      container.deps.push(dependencyInjectionMap[builtIn].injectDependency(meta));
 
       return container;
     }, {params: [], deps: []});
