@@ -4,7 +4,6 @@
   "description": "bit-bundler loader plugin for handling nodejs builtin modules, __dirname, and __filename",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "bit-bundler",
