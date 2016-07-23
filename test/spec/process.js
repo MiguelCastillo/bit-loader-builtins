@@ -47,7 +47,7 @@ describe("process test suite", function() {
 
     beforeEach(() => act = () => result = builtins.transform(meta));
 
-    describe("and the module name is process and uses process.nextTick", () => {
+    describe("and the module has name process source has process.nextTick", () => {
       beforeEach(() => {
         meta = {
           name: "process",
@@ -57,15 +57,32 @@ describe("process test suite", function() {
         act();
       });
 
-      it("then the dependency is properly injected", () => {
-        expect(result.source).to.be.equal("(function(process) {\n process.nextTick \n})(require(\'process\'))");
+      it("then the result is undefined", () => {
+        expect(result).to.be.undefined;
       });
     });
 
-    describe("and the module name is process and uses process.cwd", () => {
+    describe("and the module source has process.nextTick", () => {
       beforeEach(() => {
         meta = {
-          name: "process",
+          source: " process.nextTick "
+        };
+
+        act();
+      });
+
+      it("then the dependency is properly injected", () => {
+        expect(result.source).to.be.equal("(function(process) {\n process.nextTick \n})(require(\'process\'))");
+      });
+
+      it("then result has an undefined path", () => {
+        expect(result.path).to.be.undefined;
+      });
+    });
+
+    describe("and the module source has process.cwd", () => {
+      beforeEach(() => {
+        meta = {
           source: " process.cwd "
         };
 
@@ -75,12 +92,15 @@ describe("process test suite", function() {
       it("then the dependency is properly injected", () => {
         expect(result.source).to.be.equal("(function(process) {\n process.cwd \n})(require(\'process\'))");
       });
+
+      it("then result has an undefined path", () => {
+        expect(result.path).to.be.undefined;
+      });
     });
 
-    describe("and the module name is process and uses process.platform", () => {
+    describe("and the module source has process.platform", () => {
       beforeEach(() => {
         meta = {
-          name: "process",
           source: " process.platform "
         };
 
@@ -90,9 +110,13 @@ describe("process test suite", function() {
       it("then the dependency is properly injected", () => {
         expect(result.source).to.be.equal("(function(process) {\n process.platform \n})(require(\'process\'))");
       });
+
+      it("then result has an undefined path", () => {
+        expect(result.path).to.be.undefined;
+      });
     });
 
-    describe("and the module name is process and uses process.somethingelse", () => {
+    describe("and the module source has process.somethingelse", () => {
       beforeEach(() => {
         meta = {
           name: "process",
