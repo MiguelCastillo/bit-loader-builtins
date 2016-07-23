@@ -1,14 +1,9 @@
 # bit-loader-builtins
-> bit-bundler loader plugin for handling nodejs builtin modules, __dirname, and __filename
+> Plugin for handling nodejs builtin modules in bit-bundler.
 
-### Supported modules:
-
-- [buffer](https://github.com/feross/buffer)
-- [events](https://github.com/Gozala/events)
-- [path](https://github.com/jinder/path)
-- [process](https://github.com/defunctzombie/node-process)
+It uses [browser-builtins](https://github.com/alexgorbatchev/node-browser-builtins) to provide all the shimmed modules.
 
 
-### Variables
+# LICENSE
 
- `__dirname` and `__filename`.
+Lincensed under MIT
