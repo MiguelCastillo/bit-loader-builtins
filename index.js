@@ -5,7 +5,7 @@ var path = require("path");
 var dependencyInjectionMap = {
   process: {
     canInject: function(meta) {
-      return /process.(cwd|nextTick|platform)/.test(meta.source) && meta.name === "process";
+      return /process.(cwd|chdir|nextTick|platform|env|title|browser|argv|binding)/.test(meta.source) && meta.name !== "process";
     },
     injectDependency: function() {
       return "require('process')";
