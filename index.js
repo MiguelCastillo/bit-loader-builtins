@@ -26,6 +26,14 @@ var dependencyInjectionMap = {
     depedencyValue: function(meta) {
       return "'/" + path.relative(".", meta.path) + "'";
     }
+  },
+  global: {
+    injectDependency: function(meta) {
+      return /\bglobal\b/.test(meta.source);
+    },
+    depedencyValue: function() {
+      return "typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : typeof window !== 'undefined' ? window : {}";
+    }
   }
 };
 
