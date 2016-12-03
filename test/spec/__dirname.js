@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import builtinsFactory from "../../index";
 
-var builtins = builtinsFactory();
+var builtins = builtinsFactory.create();
 
 describe("__dirname test suite", function() {
   describe("When resolving with __dirname", () => {

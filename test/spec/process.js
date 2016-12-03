@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import builtinsFactory from "../../index";
 
-var builtins = builtinsFactory();
+var builtins = builtinsFactory.create();
 
 describe("process test suite", function() {
   describe("When resolving process", () => {
@@ -23,7 +23,7 @@ describe("process test suite", function() {
       });
 
       it("then result has the path to the shimmed process module", () => {
-        expect(result.path).to.contain("bit-loader-builtins/node_modules/browser-builtins/node_modules/process/browser.js");
+        expect(result.path).to.contain("node_modules/process/browser.js");
       });
     });
 

@@ -94,3 +94,10 @@ module.exports = function(options) {
       });
   };
 };
+
+module.exports.create = function() {
+  return {
+    resolve: resolveBuiltin,
+    transform: injectBuiltinDependency
+  };
+};
