@@ -1,4 +1,4 @@
-var browserBuiltins = require("browser-builtins");
+var browserBuiltins = require("./builtins/builtins");
 var path = require("path");
 
 
