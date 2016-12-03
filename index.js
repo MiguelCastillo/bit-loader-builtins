@@ -3,14 +3,6 @@ var path = require("path");
 
 
 var dependencyInjectionMap = {
-  process: {
-    canInject: function(meta) {
-      return /process.(cwd|chdir|nextTick|platform|env|title|browser|argv|binding)/.test(meta.source) && meta.name !== "process";
-    },
-    injectDependency: function() {
-      return "require('process')";
-    }
-  },
   __dirname: {
     canInject: function(meta) {
       return /\b__dirname\b/.test(meta.source);
@@ -27,12 +19,28 @@ var dependencyInjectionMap = {
       return "'/" + path.relative(".", meta.path) + "'";
     }
   },
+  process: {
+    canInject: function(meta) {
+      return /process.(cwd|chdir|nextTick|platform|env|title|browser|argv|binding)/.test(meta.source) && meta.name !== "process";
+    },
+    injectDependency: function() {
+      return "require('process')";
+    }
+  },
   global: {
     canInject: function(meta) {
       return /\bglobal\b/.test(meta.source);
     },
     injectDependency: function() {
       return "typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : typeof window !== 'undefined' ? window : {}";
+    }
+  },
+  Buffer: {
+    canInject: function(meta) {
+      return /\bBuffer\b/.test(meta.source) && meta.name !== "buffer";
+    },
+    injectDependency: function() {
+      return "require('buffer').Buffer";
     }
   }
 };
@@ -76,7 +84,18 @@ function injectBuiltinDependency(meta) {
 }
 
 
-module.exports = function() {
+module.exports = function(options) {
+  return function(builder) {
+    return builder
+      .configure(options)
+      .configure({
+        resolve: resolveBuiltin,
+        transform: injectBuiltinDependency
+      });
+  };
+};
+
+module.exports.create = function() {
   return {
     resolve: resolveBuiltin,
     transform: injectBuiltinDependency

@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import builtinsFactory from "../../index";
 
-var builtins = builtinsFactory();
+var builtins = builtinsFactory.create();
 
 describe("global test suite", function() {
   describe("When resolving a module with name global", () => {
