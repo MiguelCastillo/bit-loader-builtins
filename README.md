@@ -1,4 +1,6 @@
 # bit-loader-builtins
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/MiguelCastillo/bit-loader-builtins.svg)](https://greenkeeper.io/)
 > Plugin for handling nodejs builtin modules in bit-bundler.
 
 It uses all the builtins from [browserify](https://github.com/substack/node-browserify) to provide all the shimmed modules.
