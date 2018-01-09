@@ -1,5 +1,6 @@
 import { expect } from "chai";
 import builtinsFactory from "../../index";
+import combineSourceMap from "combine-source-map";
 
 var builtins = builtinsFactory.create();
 
@@ -44,7 +45,7 @@ describe("__dirname test suite", function() {
       });
 
       it("then the result.source has __dirname injected", () => {
-        expect(result.source).to.be.equal("(function(__dirname) {\n __dirname \n})(\'/test/path\')");
+        expect(combineSourceMap.removeComments(result.source)).to.be.equal("(function(__dirname) {\n __dirname \n})(\'/test/path\')\n");
       });
     });
 

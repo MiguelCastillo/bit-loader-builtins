@@ -1,5 +1,6 @@
 import { expect } from "chai";
 import builtinsFactory from "../../index";
+import combineSourceMap from "combine-source-map";
 
 var builtins = builtinsFactory.create();
 
@@ -39,7 +40,7 @@ describe("global test suite", function() {
       });
 
       it("then the global dependency is injected", () => {
-        expect(result.source).to.be.equal("(function(global) {\n global \n})(typeof global !== \'undefined\' ? global : typeof self !== \'undefined\' ? self : typeof window !== \'undefined\' ? window : {})");
+        expect(combineSourceMap.removeComments(result.source)).to.be.equal("(function(global) {\n global \n})(typeof global !== \'undefined\' ? global : typeof self !== \'undefined\' ? self : typeof window !== \'undefined\' ? window : {})\n");
       });
     });
 

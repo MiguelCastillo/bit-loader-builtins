@@ -1,5 +1,6 @@
 import { expect } from "chai";
 import builtinsFactory from "../../index";
+import combineSourceMap from "combine-source-map";
 
 var builtins = builtinsFactory.create();
 
@@ -72,7 +73,7 @@ describe("process test suite", function() {
       });
 
       it("then the dependency is properly injected", () => {
-        expect(result.source).to.be.equal("(function(process) {\n process.nextTick \n})(require(\'process\'))");
+        expect(combineSourceMap.removeComments(result.source)).to.be.equal("(function(process) {\n process.nextTick \n})(require(\'process\'))\n");
       });
 
       it("then result has an undefined path", () => {
@@ -90,7 +91,7 @@ describe("process test suite", function() {
       });
 
       it("then the dependency is properly injected", () => {
-        expect(result.source).to.be.equal("(function(process) {\n process.cwd \n})(require(\'process\'))");
+        expect(combineSourceMap.removeComments(result.source)).to.be.equal("(function(process) {\n process.cwd \n})(require(\'process\'))\n");
       });
 
       it("then result has an undefined path", () => {
@@ -108,7 +109,7 @@ describe("process test suite", function() {
       });
 
       it("then the dependency is properly injected", () => {
-        expect(result.source).to.be.equal("(function(process) {\n process.platform \n})(require(\'process\'))");
+        expect(combineSourceMap.removeComments(result.source)).to.be.equal("(function(process) {\n process.platform \n})(require(\'process\'))\n");
       });
 
       it("then result has an undefined path", () => {
