@@ -4,7 +4,7 @@
   "description": "bit-bundler loader plugin for handling nodejs builtin modules, __dirname, and __filename",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-register"
+    "test": "mocha --require babel-register"
   },
   "keywords": [
     "bit-bundler",

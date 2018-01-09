@@ -78,7 +78,7 @@ function injectBuiltinDependency(meta) {
   if (wrapped) {
     var sourceMap = combineSourceMap.create().addFile({
       source: wrapped,
-      sourceFile: meta.filename
+      sourceFile: meta.filename || "_empty.js"
     }, {
       line: 1
     });
