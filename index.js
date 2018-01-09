@@ -1,8 +1,8 @@
-var browserBuiltins = require("./builtins/builtins");
-var path = require("path");
+const path = require("path");
+const combineSourceMap = require("combine-source-map");
+const browserBuiltins = require("./builtins/builtins");
 
-
-var dependencyInjectionMap = {
+const dependencyInjectionMap = {
   __dirname: {
     canInject: function(meta) {
       return /\b__dirname\b/.test(meta.source);
@@ -63,11 +63,10 @@ function injectBuiltinDependency(meta) {
     .filter(function(builtIn) {
       return dependencyInjectionMap[builtIn].canInject(meta);
     })
-    .reduce(function(container, builtIn) {
-      container.params.push(builtIn);
-      container.deps.push(dependencyInjectionMap[builtIn].injectDependency(meta));
-
-      return container;
+    .reduce(function(accumulator, builtIn) {
+      accumulator.params.push(builtIn);
+      accumulator.deps.push(dependencyInjectionMap[builtIn].injectDependency(meta));
+      return accumulator;
     }, {params: [], deps: []});
 
   if (builtInResult.params.length) {
@@ -77,8 +76,15 @@ function injectBuiltinDependency(meta) {
   }
 
   if (wrapped) {
+    var sourceMap = combineSourceMap.create().addFile({
+      source: wrapped,
+      sourceFile: meta.filename
+    }, {
+      line: 1
+    });
+
     return {
-      source: wrapped
+      source: combineSourceMap.removeComments(wrapped) + "\n" + sourceMap.comment()
     };
   }
 }
