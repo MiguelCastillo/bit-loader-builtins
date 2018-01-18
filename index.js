@@ -1,4 +1,5 @@
 const path = require("path");
+const processProperties = Object.keys(require("process/browser")).concat("platform");
 const combineSourceMap = require("combine-source-map");
 const browserBuiltins = require("./builtins/builtins");
 
@@ -21,7 +22,7 @@ const dependencyInjectionMap = {
   },
   process: {
     canInject: function(meta) {
-      return /process.(cwd|chdir|nextTick|platform|env|title|browser|argv|binding)/.test(meta.source) && meta.name !== "process";
+      return new RegExp("process.(" + processProperties.join("|") + ")").test(meta.source) && meta.name !== "process";
     },
     injectDependency: function() {
       return "require('process')";
@@ -88,7 +89,6 @@ function injectBuiltinDependency(meta) {
     };
   }
 }
-
 
 module.exports = function(options) {
   return function(builder) {
