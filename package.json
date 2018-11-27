@@ -39,7 +39,7 @@
     "readable-stream": "^2.2.2",
     "stream-browserify": "^2.0.1",
     "stream-http": "^3.0.0",
-    "string_decoder": "^1.0.3",
+    "string_decoder": "^1.2.0",
     "timers-browserify": "^2.0.2",
     "tty-browserify": "0.0.1",
     "url": "^0.11.0",
